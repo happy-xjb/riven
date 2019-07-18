@@ -14,4 +14,7 @@
     <select id="selectAll" resultType="com.yealink.entities.Service">
         select * from service
     </select>
+    <select id="selectAllServiceName" resultType="java.lang.String">
+        select distinct service from service
+    </select>
 </mapper>

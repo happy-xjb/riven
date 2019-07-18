@@ -9,5 +9,5 @@ public class Node {
     private String id;
     private String node;
     private String address;
-    private int healthy;
+    private int health;
 }
