@@ -3,7 +3,7 @@
 <mapper  namespace="com.yealink.dao.TagDao">
 
     <select id="selectByService" resultType="com.yealink.entities.Tag" parameterType="string">
-        select * from tag where service_id = #{id}
+        select * from tag where service = #{id}
     </select>
     <select id="selectValueByService" resultType="java.lang.String" parameterType="string">
         select value from tag where service = #{id}

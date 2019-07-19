@@ -19,10 +19,14 @@ public class TagDaoTest {
     private TagDao tagDao;
 
     @Test
-    public void selectByServiceId(){
-        List<Tag> tags = tagDao.selectByServiceId("1");
-        String[] stringArray = TagUtil.tagListToStringArray(tags);
-        System.out.println(stringArray[0]);
-        assertEquals(2,tags.size());
+    public void selectByService(){
+        List<Tag> tags = tagDao.selectByService("redis");
+        System.out.println(tags);
+    }
+
+    @Test
+    public void selectValueByService(){
+        List<String> list = tagDao.selectValueByService("redis");
+        System.out.println(list);
     }
 }

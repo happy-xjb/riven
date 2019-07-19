@@ -45,4 +45,10 @@ public class ServiceDaoTest {
         List<Service> services = serviceDao.selectAll();
         assertEquals(3,services.size());
     }
+
+    @Test
+    public void selectAllServiceName(){
+        List<String> allServiceName = serviceDao.selectAllServiceName();
+        System.out.println(allServiceName);
+    }
 }
