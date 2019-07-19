@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/catalog")
+@RequestMapping("/v1/catalog")
 public class CatalogController {
     @Autowired
     private NodeService nodeService;
