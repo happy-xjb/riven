@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="generateService" value="true" />
+        <option name="javaMapperPackage" value="com.yealink.dao" />
+        <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
+        <option name="javaModelPackage" value="com.yealink.entities" />
+        <option name="javaModelPath" value="$PROJECT_DIR$/src/main/java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="consul" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="consul">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.yealink.dao" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="javaModelPacakge" value="com.yealink.entities" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="javaServicePackage" value="com.yealink.service" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="xmlPackage" value="mappers" />
+                  <option name="xmlPath" value="$PROJECT_DIR$/src/main/resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="consul_schema:check">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="Check" />
+                  <option name="moduleName" value="consul" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="consul_schema:node">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="Node" />
+                  <option name="moduleName" value="consul" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="consul_schema:service_instance">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="ServiceInstance" />
+                  <option name="moduleName" value="consul" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="consul_schema:service_name">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="ServiceName" />
+                  <option name="moduleName" value="consul" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="consul_schema:service_tag">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="ServiceTag" />
+                  <option name="moduleName" value="consul" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="useLomBokOnModel" value="true" />
+        <option name="xmlMapperPackage" value="mappers" />
+        <option name="xmlMapperPath" value="$PROJECT_DIR$/src/main/resources" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

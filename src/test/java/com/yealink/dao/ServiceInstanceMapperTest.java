@@ -1,7 +1,6 @@
 package com.yealink.dao;
 
-import com.yealink.entities.Tag;
-import com.yealink.utils.TagUtil;
+import com.yealink.entities.ServiceInstance;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +13,13 @@ import static org.junit.Assert.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TagDaoTest {
+public class ServiceInstanceMapperTest {
     @Autowired
-    private TagDao tagDao;
+    private ServiceInstanceMapper serviceInstanceMapper;
 
     @Test
-    public void selectByService(){
-        List<Tag> tags = tagDao.selectByService("redis");
-        System.out.println(tags);
-    }
-
-    @Test
-    public void selectValueByService(){
-        List<String> list = tagDao.selectValueByService("redis");
-        System.out.println(list);
+    public void selectAll(){
+        List<ServiceInstance> serviceInstances = serviceInstanceMapper.selectAll();
+        System.out.println(serviceInstances);
     }
 }

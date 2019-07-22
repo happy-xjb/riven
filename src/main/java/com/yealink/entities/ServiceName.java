@@ -5,7 +5,9 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class Tag {
-    String serviceId;
-    String value;
+public class ServiceName {
+    /**
+    * 服务名称
+    */
+    private String service;
 }

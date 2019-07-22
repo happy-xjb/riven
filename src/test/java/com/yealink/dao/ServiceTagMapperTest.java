@@ -1,6 +1,5 @@
 package com.yealink.dao;
 
-import com.yealink.entities.Node;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,20 @@ import static org.junit.Assert.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class NodeDaoTest {
+public class ServiceTagMapperTest {
     @Autowired
-    NodeDao nodeDao;
+    ServiceTagMapper serviceTagMapper;
 
     @Test
-    public void selectAll(){
-        List<Node> nodes = nodeDao.selectAll();
-        System.out.println(nodes);
+    public void selectByServiceId(){
+        List<String> list = serviceTagMapper.selectByServiceId("myapp_01");
+        System.out.println(list);
     }
+
+    @Test
+    public void deleteAllByServiceId(){
+        int num = serviceTagMapper.deleteAllByServiceId("myqq_05");
+        System.out.println(num);
+    }
+
 }

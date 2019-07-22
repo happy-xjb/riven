@@ -5,19 +5,21 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class Node {
+public class ServiceInstance {
     /**
-    * 唯一的UUID
+    * 服务实例ID
     */
-    private String nodeId;
+    private String serviceInstanceId;
 
     /**
-    * 节点名称
+    * 服务名称
     */
-    private String name;
+    private String service;
 
     /**
-    * 节点IP地址
+    * 服务实例IP地址
     */
     private String address;
+
+    private Integer port;
 }

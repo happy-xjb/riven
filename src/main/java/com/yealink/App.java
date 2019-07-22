@@ -1,11 +1,14 @@
 package com.yealink;
 
 import com.ecwid.consul.v1.agent.model.Check;
+import com.yealink.config.Self;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -26,46 +29,13 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
  */
 @SpringBootApplication
 @MapperScan("com.yealink.dao")
+@EnableConfigurationProperties(Self.class)
 public class App
 {
     public static void main( String[] args )
     {
         SpringApplication.run(App.class,args);
-        /**
-        ApplicationHome home = new ApplicationHome(App.class);
-        File jarFile = home.getSource();
-        String jarFileParent = jarFile.getParent(); //jar包运行目录
-
-        //node-id文件用于存放节点id
-        File nodeID = new File(jarFileParent+"\\data\\node-id");
-        //如果node-id
-        if(!nodeID.exists()) {
-            try {
-                nodeID.createNewFile();
-                FileOutputStream nodeID_os = new FileOutputStream(nodeID);
-                byte[] bytes = UUID.randomUUID().toString().getBytes();
-                nodeID_os.write(bytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }**/
-
-        //Consul client = Consul.builder().build();
-
-
     }
 
-    @Bean("scheduledThreadPoolExecutor")
-    public ScheduledThreadPoolExecutor getCheckSchedulePool() {
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
 
-        return executor;
-    }
-
-    @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Arrays.asList(MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON));
-        return converter;
-    }
 }
