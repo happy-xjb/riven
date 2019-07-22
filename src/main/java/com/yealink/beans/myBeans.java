@@ -1,5 +1,7 @@
 package com.yealink.beans;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.filter.FilteringParserDelegate;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.context.annotation.Bean;
@@ -20,5 +22,6 @@ public class myBeans {
     public CloseableHttpClient getHttpClient(){
         return HttpClientBuilder.create().build();
     }
+
 
 }

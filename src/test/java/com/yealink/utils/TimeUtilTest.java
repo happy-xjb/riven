@@ -10,8 +10,8 @@ public class TimeUtilTest {
 
     @Test
     public void getTimeUnit() {
-        TimeUnit timeUnit = TimeUtil.getTimeUnit("10us");
-        System.out.println(timeUnit);
+        TimeUnit timeUnit = TimeUtil.getTimeUnit("10s");
+        System.out.println(TimeUnit.MILLISECONDS.convert(10,timeUnit));
     }
 
     @Test
