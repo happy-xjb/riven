@@ -1,5 +1,7 @@
 package com.yealink.service;
 
-public interface HealthService {
+import java.util.List;
 
+public interface HealthService {
+    List<com.ecwid.consul.v1.health.model.HealthService> getHealthServices(String service);
 }

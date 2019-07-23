@@ -1,9 +1,10 @@
 package com.yealink.service.impl;
 
+import com.ecwid.consul.v1.agent.model.Check;
+import com.ecwid.consul.v1.agent.model.NewCheck;
 import com.ecwid.consul.v1.agent.model.NewService;
-import com.yealink.dao.ServiceInstanceMapper;
-import com.yealink.dao.ServiceNameMapper;
-import com.yealink.dao.ServiceTagMapper;
+import com.yealink.dao.*;
+import com.yealink.entities.Node;
 import com.yealink.entities.ServiceInstance;
 import com.yealink.entities.ServiceName;
 import com.yealink.entities.ServiceTag;
@@ -11,6 +12,7 @@ import com.yealink.service.AgentService;
 import com.yealink.utils.CheckUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,14 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @Slf4j
 public class AgentServiceImpl implements AgentService {
+    @Autowired
+    CheckMapper checkMapper;
+
     @Autowired
     CloseableHttpClient httpClient;
 
@@ -36,6 +42,9 @@ public class AgentServiceImpl implements AgentService {
 
     @Autowired
     ServiceNameMapper serviceNameMapper;
+
+    @Autowired
+    NodeMapper nodeMapper;
 
     @Override
     public Map<String, com.ecwid.consul.v1.agent.model.Service> getAgentServices() {
@@ -56,6 +65,7 @@ public class AgentServiceImpl implements AgentService {
 
     @Override
     public void agentServiceRegister(NewService newService) {
+
         //服务名写入数据库
         //如果不存在再添加
         if(serviceNameMapper.selectByService(newService.getName()) == null)   serviceNameMapper.insert(new ServiceName().setService(newService.getName()));
@@ -105,4 +115,24 @@ public class AgentServiceImpl implements AgentService {
 
         //TODO 删除对应的check
     }
+
+    @Override
+    public Map<String, Check> getAgentChecks() {
+        List<com.yealink.entities.Check> checks = checkMapper.selectAll();
+        Map<String,Check> map = new HashMap<>();
+        for(com.yealink.entities.Check check: checks){
+            Check checkVO = new Check();
+            BeanUtils.copyProperties(check,checkVO);
+            checkVO.setServiceTags(serviceTagMapper.selectByServiceId(check.getServiceId()));
+            map.put(check.getCheckId(),checkVO);
+        }
+        return map;
+    }
+
+    @Override
+    public void agentCheckRegister(NewCheck newCheck) {
+
+    }
+
+
 }

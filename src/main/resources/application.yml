@@ -12,5 +12,6 @@ mybatis:
   type-aliases-package: com.yealink.entities
   configuration:
     map-underscore-to-camel-case: true
-
-
+consul:
+  config:
+    node-name: das

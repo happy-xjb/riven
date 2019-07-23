@@ -6,10 +6,11 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 
 @Data
-@ConfigurationProperties("consul")
-@Component
+@ConfigurationProperties(prefix = "consul")
 public class Self {
 
     public enum LogLevel {
@@ -20,7 +21,7 @@ public class Self {
         ERR
     }
 
-    @Data
+//    @Data
     public static class Config {
 
         @JsonProperty("Datacenter")
@@ -38,7 +39,47 @@ public class Self {
         @JsonProperty("Version")
         private String version;
 
+    public String getDatacenter() {
+        return datacenter;
     }
+
+    public void setDatacenter(String datacenter) {
+        this.datacenter = datacenter;
+    }
+
+    public String getNodeName() {
+        return nodeName;
+    }
+
+    public void setNodeName(String nodeName)  {
+
+        this.nodeName = nodeName;
+    }
+
+    public String getRevision() {
+        return revision;
+    }
+
+    public void setRevision(String revision) {
+        this.revision = revision;
+    }
+
+    public boolean isServer() {
+        return server;
+    }
+
+    public void setServer(boolean server) {
+        this.server = server;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+}
 
     @Data
     public static class DebugConfig {
@@ -59,7 +100,7 @@ public class Self {
         private LogLevel logLevel;
 
         @JsonProperty("NodeID")
-        private String nodeId;
+        private String nodeId = UUID.randomUUID().toString();
 
         @JsonProperty("ClientAddrs")
         private String[] clientAddresses;
@@ -107,10 +148,10 @@ public class Self {
     }
 
     @JsonProperty("Config")
-    private Config config;
+    private Config config = new Config();
 
     @JsonProperty("DebugConfig")
-    private DebugConfig debugConfig;
+    private DebugConfig debugConfig = new DebugConfig();
 
     @JsonProperty("Member")
     private Member member;

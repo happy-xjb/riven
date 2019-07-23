@@ -3,21 +3,13 @@ package com.yealink.controller.agent;
 import com.ecwid.consul.v1.agent.model.NewService;
 import com.ecwid.consul.v1.agent.model.Service;
 import com.yealink.controller.AgentController;
-import com.yealink.entities.ServiceInstance;
-import com.yealink.entities.ServiceName;
-import com.yealink.entities.ServiceTag;
 import com.yealink.service.*;
 import com.yealink.utils.JsonUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ScheduledExecutorService;
 
 @RestController
 public class AgentServiceController extends AgentController {

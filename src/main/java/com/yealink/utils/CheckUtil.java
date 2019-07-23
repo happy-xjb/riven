@@ -1,14 +1,11 @@
 package com.yealink.utils;
 
 import com.ecwid.consul.v1.agent.model.NewService;
-import com.fasterxml.jackson.core.JsonParser;
 import com.google.gson.Gson;
 import com.yealink.dao.CheckMapper;
 import com.yealink.entities.Check;
 import com.yealink.vo.ActuatorHealthVO;
-import jodd.json.meta.JSON;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -54,7 +51,8 @@ public class CheckUtil {
 
         //检查check是否已经存在
         if(checkMapper.selectByPrimaryKey(check.getCheckId())==null)    checkMapper.insertSelective(check);
-
+        int oldValue = 1;    //设定check初始状态为1，代表passing
+        int newValue = 1;
         //开启定时任务
         ScheduledFuture<?> scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(() -> {
             RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout((int) TimeUnit.MILLISECONDS.convert(timeout_timeNum, timeout_timeUnit))
@@ -65,7 +63,7 @@ public class CheckUtil {
             try {
                 response = httpClient.execute(httpGet);
                 HttpEntity entity = response.getEntity();
-                check.setOutput("HTTP GET " + url + response.getStatusLine());
+                check.setOutput("GET " + url +" " + response.getStatusLine());
                 if (entity != null) {
                     String json = EntityUtils.toString(entity);
                     ActuatorHealthVO actuatorHealthVO = gson.fromJson(json, ActuatorHealthVO.class);
@@ -74,14 +72,16 @@ public class CheckUtil {
                         checkMapper.updateByPrimaryKey(check);
                     }
                 }
-                log.info("[Service] check pass");
+                log.info("[Service] check pass"+check);
             } catch (IOException e) {
+                e.printStackTrace();
                 log.warn("【服务异常】" + check);
                 check.setStatus("failing").setOutput("服务异常");
                 checkMapper.updateByPrimaryKey(check);
+
             }
         }, 0, interval_timeNum, interval_timeUnit);
 
-        scheduledFuture.cancel(true);
+        System.out.println("执行至此");
     }
 }
